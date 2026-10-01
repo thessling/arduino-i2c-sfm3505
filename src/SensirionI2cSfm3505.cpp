@@ -53,8 +53,8 @@ SensirionI2cSfm3505::SensirionI2cSfm3505() {
 float SensirionI2cSfm3505::signalAirFlow(const uint8_t* flowBytesRaw) {
     int32_t flowRaw = 0;
     float airFlow = 0.0;
-    flowRaw =
-        (flowBytesRaw[0] << 16) | (flowBytesRaw[1] << 8) | flowBytesRaw[2];
+    flowRaw = ((int32_t)flowBytesRaw[0] << 16) |
+              ((int32_t)flowBytesRaw[1] << 8) | flowBytesRaw[2];
     airFlow = ((float)(flowRaw)-8388608) / 25600;
     return airFlow;
 }
@@ -62,23 +62,23 @@ float SensirionI2cSfm3505::signalAirFlow(const uint8_t* flowBytesRaw) {
 float SensirionI2cSfm3505::signalO2Flow(const uint8_t* flowBytesRaw) {
     int32_t flowRaw = 0;
     float o2Flow = 0.0;
-    flowRaw =
-        (flowBytesRaw[3] << 16) | (flowBytesRaw[4] << 8) | flowBytesRaw[5];
+    flowRaw = ((int32_t)flowBytesRaw[3] << 16) |
+              ((int32_t)flowBytesRaw[4] << 8) | flowBytesRaw[5];
     o2Flow = ((float)(flowRaw)-8388608) / 25600;
     return o2Flow;
 }
 
 uint32_t SensirionI2cSfm3505::signalO2FlowRaw(const uint8_t* flowBytesRaw) {
     uint32_t o2FlowRaw = 0;
-    o2FlowRaw = (uint32_t)((flowBytesRaw[3] << 16) | (flowBytesRaw[4] << 8) |
-                           flowBytesRaw[5]);
+    o2FlowRaw = (uint32_t)(((int32_t)flowBytesRaw[3] << 16) |
+                           ((int32_t)flowBytesRaw[4] << 8) | flowBytesRaw[5]);
     return o2FlowRaw;
 }
 
 uint32_t SensirionI2cSfm3505::signalAirFlowRaw(const uint8_t* flowBytesRaw) {
     uint32_t airFlowRaw = 0;
-    airFlowRaw = (uint32_t)((flowBytesRaw[0] << 16) | (flowBytesRaw[1] << 8) |
-                            flowBytesRaw[2]);
+    airFlowRaw = (uint32_t)(((int32_t)flowBytesRaw[0] << 16) |
+                            ((int32_t)flowBytesRaw[1] << 8) | flowBytesRaw[2]);
     return airFlowRaw;
 }
 
